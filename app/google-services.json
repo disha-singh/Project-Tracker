@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "41242338439",
+    "firebase_url": "https://project-tracker-f2414.firebaseio.com",
+    "project_id": "project-tracker-f2414",
+    "storage_bucket": "project-tracker-f2414.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41242338439:android:af84945cb909daee534422",
+        "android_client_info": {
+          "package_name": "com.example.projecttracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41242338439-qnneemfe3jfpb3l3kqmvrro300pj3lcb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZfs0KErtqPS1MeGTaRDytCKpZTtwt6eI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41242338439-qnneemfe3jfpb3l3kqmvrro300pj3lcb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
