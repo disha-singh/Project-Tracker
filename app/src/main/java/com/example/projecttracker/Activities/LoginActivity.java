@@ -3,12 +3,12 @@ package com.example.projecttracker.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -20,105 +20,97 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Objects;
+import android.app.ProgressDialog;
+import android.widget.TextView;
+
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText userMail, userPassword;
+    private EditText userMail;
+    private EditText usrPassword;
+    private TextView Info;
     private Button btnLogin;
     private ProgressBar loginProgress;
+    private int counter = 3;
     private FirebaseAuth mAuth;
-    private Intent HomeActivity;
+    private ProgressDialog progressDialog;
+    private Intent HomePage;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         userMail = findViewById(R.id.login_mail);
-        userPassword = findViewById(R.id.login_password);
-        btnLogin = findViewById(R.id.loginBtn);
+        usrPassword = (EditText) findViewById(R.id.login_password);
+        Info = (TextView) findViewById(R.id.tvInfo);
         loginProgress = findViewById(R.id.login_progress);
+        btnLogin = (Button) findViewById(R.id.loginBtn);
+
+        Info.setText("No of attempts remaining: 3");
+
         mAuth = FirebaseAuth.getInstance();
-        HomeActivity = new Intent(this, com.example.projecttracker.Activities.HomeActivity.class);
-        ImageView loginPhoto = findViewById(R.id.login_photo);
-        loginPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        progressDialog = new ProgressDialog(this);
 
-                Intent registerActivity = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(registerActivity);
-                finish();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            finish();
+            startActivity(new Intent(LoginActivity.this, HomePage.class));
+        }
 
-
-            }
-        });
-
-        loginProgress.setVisibility(View.INVISIBLE);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginProgress.setVisibility(View.VISIBLE);
-                btnLogin.setVisibility(View.INVISIBLE);
-
-                final String mail = userMail.getText().toString();
-                final String password = userPassword.getText().toString();
-
-                if (mail.isEmpty() || password.isEmpty()) {
-                    showMessage("Please Verify All Field");
-                    btnLogin.setVisibility(View.VISIBLE);
-                    loginProgress.setVisibility(View.INVISIBLE);
-                } else {
-                    signIn(mail, password);
-                }
-
+                validate(userMail.getText().toString(), usrPassword.getText().toString());
 
             }
         });
-
-
     }
 
-    private void signIn(String mail, String password) {
+    private void validate(String userMail, String userPassword) {
 
-
-        mAuth.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(userMail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
-
                 if (task.isSuccessful()) {
-
+                    progressDialog.dismiss();
                     loginProgress.setVisibility(View.INVISIBLE);
                     btnLogin.setVisibility(View.VISIBLE);
-                    updateUI();
-
+                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    checkEmailVerification();
                 } else {
-                    showMessage(Objects.requireNonNull(task.getException()).getMessage());
-                    btnLogin.setVisibility(View.VISIBLE);
-                    loginProgress.setVisibility(View.INVISIBLE);
+                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    counter--;
+                    Info.setText("No of attempts remaining: " + counter);
+                    progressDialog.dismiss();
+                    if (counter == 0) {
+                        btnLogin.setEnabled(false);
+                    }
                 }
-
-
             }
         });
 
-
     }
 
-    private void updateUI() {
 
-        startActivity(HomeActivity);
-        finish();
 
+    private void checkEmailVerification(){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        assert firebaseUser != null;
+        boolean emailflag = firebaseUser.isEmailVerified();
+
+        startActivity(new Intent(LoginActivity.this, HomePage.class));
+
+        if(emailflag){
+            finish();
+            startActivity(new Intent(LoginActivity.this, HomePage.class));
+        }else{
+            Toast.makeText(LoginActivity.this, "Verify your email", Toast.LENGTH_SHORT).show();
+            mAuth.signOut();
+        }
     }
-
-    private void showMessage(String text) {
-
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
-    }
-
 
     @Override
     protected void onStart() {
@@ -130,4 +122,11 @@ public class LoginActivity extends AppCompatActivity {
             updateUI();
         }
     }
+
+    private void updateUI() {
+        startActivity(HomePage);
+        finish();
+
+    }
+
 }

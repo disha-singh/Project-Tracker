@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="loginBtn" type="id" />
+    <item name="login_password" type="id" />
+    <item name="guideline3" type="id" />
+    <item name="login_mail" type="id" />
+    <item name="tvInfo" type="id" />
+</resources>
