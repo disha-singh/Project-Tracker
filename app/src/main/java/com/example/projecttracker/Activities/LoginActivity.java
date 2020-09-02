@@ -1,17 +1,16 @@
 package com.example.projecttracker.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projecttracker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private ProgressBar loginProgress;
     private FirebaseAuth mAuth;
-    private Intent HomeActivity;
+    private Intent HomePage;
+    private TextView forgot_password;
 
 
     @Override
@@ -41,19 +41,8 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.loginBtn);
         loginProgress = findViewById(R.id.login_progress);
         mAuth = FirebaseAuth.getInstance();
-        HomeActivity = new Intent(this, com.example.projecttracker.Activities.HomeActivity.class);
-        ImageView loginPhoto = findViewById(R.id.login_photo);
-        loginPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent registerActivity = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(registerActivity);
-                finish();
-
-
-            }
-        });
+        HomePage = new Intent(this, HomePage.class);
+        forgot_password = (TextView) findViewById(R.id.tvForgotPassword);
 
         loginProgress.setVisibility(View.INVISIBLE);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 final String password = userPassword.getText().toString();
 
                 if (mail.isEmpty() || password.isEmpty()) {
-                    showMessage("Please Verify All Field");
+                    showMessage("Please Verify All Fields");
                     btnLogin.setVisibility(View.VISIBLE);
                     loginProgress.setVisibility(View.INVISIBLE);
                 } else {
@@ -74,6 +63,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, PasswordReset.class));
             }
         });
 
@@ -109,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI() {
 
-        startActivity(HomeActivity);
+        startActivity(HomePage);
         finish();
 
     }
@@ -130,4 +126,5 @@ public class LoginActivity extends AppCompatActivity {
             updateUI();
         }
     }
+
 }
