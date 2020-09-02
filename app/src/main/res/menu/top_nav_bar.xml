@@ -3,10 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <!--TODO: SEARCH BAR
+    <item
         android:id="@+id/logoutBtn"
         android:icon="@drawable/ic_logout"
         android:title="@string/logout"
-        app:showAsAction="always"></item>
-
+        app:showAsAction="ifRoom"/>
+        -->
 
 </menu>
