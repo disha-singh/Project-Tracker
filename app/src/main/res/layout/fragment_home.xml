@@ -1,19 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
-    tools:context=".Fragments.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.HomeF">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/home"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp" />
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_width="517dp"
+        android:layout_height="301dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:hapticFeedbackEnabled="true"
+        android:isScrollContainer="true"
+        android:scrollbarStyle="insideInset" />
 
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="327dp"
+        android:layout_below="@+id/calendar"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="69dp"
+        android:columnCount="2"
+        android:orientation="vertical"
+        android:rowCount="2"
+        android:weightSum="10">
 
-</FrameLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_notes"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/homepageAccent"
+            app:cardElevation="8dp">
+
+            <GridLayout
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_margin="20dp"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_notes_icon" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/notes"
+                    android:textSize="14sp"
+                    android:elegantTextHeight="true"
+                    android:textColor="#7E7B79"
+                    android:textAlignment="center"
+                    android:elevation="50dp">
+                </TextView>
+
+            </GridLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_assignments"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/homepageAccent"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_margin="20dp"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_assignment_icon" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/assignments"
+                    android:textSize="14sp"
+                    android:elegantTextHeight="true"
+                    android:textColor="#7E7B79"
+                    android:textAlignment="center"
+                    android:elevation="50dp">
+                </TextView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_tasks"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/homepageAccent"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_margin="20dp"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_task_icon" />
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/tasks"
+                    android:textSize="14sp"
+                    android:elegantTextHeight="true"
+                    android:textColor="#7E7B79"
+                    android:textAlignment="center"
+                    android:elevation="50dp">
+                </TextView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_dashboard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:elevation="4dp"
+            app:cardBackgroundColor="@color/homepageAccent"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="130dp"
+                android:layout_margin="20dp"
+                android:orientation="vertical"
+                android:weightSum="3">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_dashboard_icon" />
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/dashboard"
+                    android:textSize="14sp"
+                    android:elegantTextHeight="true"
+                    android:textColor="#7E7B79"
+                    android:textAlignment="center"
+                    android:elevation="50dp">
+                </TextView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
+</RelativeLayout>

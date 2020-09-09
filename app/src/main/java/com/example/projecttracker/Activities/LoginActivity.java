@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.loginBtn);
         loginProgress = findViewById(R.id.login_progress);
         mAuth = FirebaseAuth.getInstance();
-        HomePage = new Intent(this, HomePage.class);
+        HomePage = new Intent(this, InitialActivity.class);
         forgot_password = (TextView) findViewById(R.id.tvForgotPassword);
 
         loginProgress.setVisibility(View.INVISIBLE);

@@ -18,7 +18,7 @@ import com.example.projecttracker.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class HomePage extends AppCompatActivity {
+public class InitialActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private FirebaseAuth firebaseAuth;
@@ -93,7 +93,7 @@ public class HomePage extends AppCompatActivity {
     private void Logout() {
         firebaseAuth.signOut();
         finish();
-        startActivity(new Intent(HomePage.this, LoginActivity.class));
+        startActivity(new Intent(InitialActivity.this, LoginActivity.class));
     }
 }
 
