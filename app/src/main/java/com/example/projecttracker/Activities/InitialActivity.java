@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import com.example.projecttracker.Fragments.HomeFragment;
+import com.example.projecttracker.Fragments.HomeF;
+//import com.example.projecttracker.Fragments.HomeFragment;
 import com.example.projecttracker.Fragments.MessageFragment;
 import com.example.projecttracker.Fragments.NotificationsFragment;
 import com.example.projecttracker.R;
@@ -35,7 +36,7 @@ public class HomePage extends AppCompatActivity {
                             break;
 
                         case R.id.bottom_home:
-                            fragment = new HomeFragment();
+                            fragment = new HomeF();
                             break;
 
 
@@ -64,7 +65,7 @@ public class HomePage extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavBar);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeF()).commit();
 
         firebaseAuth = FirebaseAuth.getInstance();
         toolbar = findViewById(R.id.topNavBar);
